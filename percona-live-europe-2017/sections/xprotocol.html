@@ -1,0 +1,80 @@
+<!-- Johannes: -->
+<!-- ~5 minutes -->
+<h2>X Protocol</h2>
+<section>
+	<p>Protocol Insights</p>
+	<ul>
+		<li>New Protocol implemented in X Plugin</li>
+		<li>Based on Google Protocol Buffers
+			<ul>
+				<li>More flexibility for future extensions</li>
+			</ul>
+		</li>
+		<li>Better understanding of content
+			<ul>
+			<li>CRUD Expression trees in protocol</li>
+			<li>Expectations to attach conditions on pipelined statements</li>
+			<li>Bound parameters</li>
+			</ul>
+		</li>
+	</ul>
+	<aside class="notes">
+		<ul>
+			<li>Initially shipped as <i>rapid</i> plugin in MySQL 5.7.12</li>
+			<li>Google Protobuf is an industry standard data serialisation library</li>
+			<li>Middleware can use more information</li>
+		</ul>
+	</aside>
+</section>
+<section>
+	<p>Protocol operations</p>
+	<!-- TODO:Johannes shorten, or not? -->
+	<pre><code data-trim data-noescape>
+message ClientMessages {
+  enum Type {
+    CON_CAPABILITIES_GET = 1;
+    CON_CAPABILITIES_SET = 2;
+    CON_CLOSE = 3;
+
+    SESS_AUTHENTICATE_START = 4;
+    SESS_AUTHENTICATE_CONTINUE  = 5;
+    SESS_RESET = 6;
+    SESS_CLOSE = 7;
+
+    SQL_STMT_EXECUTE = 12;
+
+    CRUD_FIND = 17;
+    CRUD_INSERT = 18;
+    CRUD_UPDATE = 19;
+    CRUD_DELETE = 20;
+
+    EXPECT_OPEN = 24;
+    EXPECT_CLOSE = 25;
+
+    CRUD_CREATE_VIEW = 30;
+    CRUD_MODIFY_VIEW = 31;
+    CRUD_DROP_VIEW = 32;
+  }
+}
+	</code></pre>
+</section>
+<section>
+	<p>CRUD Example</p>
+	<!-- TODO:Johannes shorten, or not? -->
+	<pre><code data-trim data-noescape>
+Mysqlx.Crud.Find {
+  collection { name: "collection_name",  schema: "test"  }
+  data_model: DOCUMENT
+  criteria {
+    type: OPERATOR
+    operator {
+ name: "=="
+ param { type: IDENT,   identifier { name:"_id" }  }
+ param { type: LITERAL, literal { type: V_STRING,
+                                  v_string: { value: "some_string" } } }
+    }
+  }
+}
+		</code>
+	</pre>
+</section>
