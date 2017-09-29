@@ -6,11 +6,11 @@ body:after {
 }
 
 body:before {
-	content: "Copyright © 2017, Oracle and/or its affiliates. All rights reserved.";
+	content: 'Copyright © 2017, Oracle and/or its affiliates. All rights reserved.';
 	position: fixed;
 	bottom: 0.5em;
 	right: 3.5em;
-	font-family: Calibri;
+	font-family: 'Calibri', 'Open Sans', sans-serif;
 }
 
 .reveal:after {
@@ -21,7 +21,7 @@ body:before {
 }
 
 .reveal {
-  font-family: Calibri;
+  font-family: 'Calibri', 'Open Sans', sans-serif;
   color: #58595b;
 }
 
@@ -37,7 +37,7 @@ body:before {
 }
 
 .reveal code {
-  font-family: "Source Code Pro", monospace;
+  font-family: 'Source Code Pro', monospace;
   font-size: 0.75em;
 }
 
@@ -88,7 +88,7 @@ body:before {
 }
 
 .reveal .inline {
-  font-family: "Source Code Pro", monospace;
+  font-family: 'Source Code Pro', monospace;
   font-style: italic;
   font-size: 0.75em;
 }
