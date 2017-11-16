@@ -32,7 +32,7 @@ body:before {
 .reveal h5,
 .reveal h6 {
   color: #58595b;
-  font-family: Calibri;
+  font-family: 'Calibri', 'Open sans', sans-serif;
   text-transform: none;
 }
 
