@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>MySQL Document Store and Node.JS</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="css/reveal-orcl-override.css">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background="images/mysql_bg.jpg" class="mysql-full">
+					<div class="main-title">MySQL Document Store</div>
+					<div class="main-subtitle">and Node.js</div>
+					<div class="authors">
+						<div>Johannes Schlüter</div>
+						<div>Rui Quelhas</div>
+						<div>MySQL Clients and Middleware</div>
+						<div>November 2017</div>
+					</div>
+				</section>
+				<section data-external="sections/speakers.html"></section>
+				<section data-external="sections/outline.html"></section>
+				<section data-external="sections/unstructured.html"></section>
+				<section data-external="sections/interlude.html"></section>
+				<section data-external="sections/docstore.html"></section>
+				<section data-external="sections/xprotocol.html"></section>
+				<section data-external="sections/nodejs.html"></section>
+				<section data-external="sections/cnodejs.html"></section>
+				<section data-external="sections/snippets.html"></section>
+				<section data-external="sections/links.html"></section>
+				<section>
+					<img src="images/dolphin.jpg" id="sakilla">
+				</section>
+				<section>
+					<h2>Safe Harbor Statement</h2>
+					<p>The preceding is intended to outline our general product direction. It is intended for information purposes only, and may not be incorporated into any contract. It is not a commitment to deliver any material, code, or functionality, and should not be relied upon in making purchasing decisions. The development, release, and timing of any features or functionality described for Oracle’s products remains at the sole discretion of Oracle.</p>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/external/external.js', condition: function() { return !!document.querySelector('[data-external],[data-external-replace]'); } }
+				]
+			});
+
+			Reveal.configure({
+				margin: 0,
+				slideNumber: true,
+				width: 1080
+			});
+		</script>
+	</body>
+</html>

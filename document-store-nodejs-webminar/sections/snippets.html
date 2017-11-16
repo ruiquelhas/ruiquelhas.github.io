@@ -1,0 +1,132 @@
+<h2>Putting everything together</h2>
+<section id="cnodejs-snippet-boilerplate">
+    <p>Boilerplate, sessions and schemas</p>
+    <pre>
+        <code class="sh" data-trim data-noescape>
+        $ npm install @mysql/xdevapi
+        </code>
+    </pre>
+    <pre>
+        <code class="js" data-trim data-noescape>
+        const mysqlx = require('@mysql/xdevapi')
+
+        const session = await mysqlx.getSession('mysqlx://demo@localhost:33060')
+
+        // re-create the schema
+        await session.dropSchema('ple2017')
+        const schema = await session.createSchema('ple2017')
+        </code>
+    </pre>
+</section>
+<section id="cnodejs-snippet-crud">
+    <p>Working with collections and documents (<b class="orcl-red">CRUD</b>)</p>
+    <pre>
+        <code class="js" data-trim data-noescape>
+        const schema = session.getSchema('ple2017')
+
+        // re-create a collection
+        await schema.dropCollection('pubs')
+        const collection = await schema.createCollection('pubs')
+
+        // or re-use an existing collection
+        const collection = await schema.createCollection('pubs', { ReuseExistingObject: true })
+        </code>
+    </pre>
+</section>
+<section id="cnodejs-snippet-create">
+    <p><b class="orcl-red">C</b>REATE</p>
+    <pre>
+        <code class="js" data-trim data-noescape>
+        const collection = schema.getCollection('pubs')
+
+        // pipelining parallel calls
+        await Promise.all([
+            collection
+                .add({ type: 'node', _id: 132775981, ... })
+                .execute(),
+            collection
+                .add([
+                    { type: 'node', _id: 132775992, ... },
+                    { type: 'node', _id: 132776246, ... }
+                ])
+                .execute()
+        ])
+        </code>
+    </pre>
+</section>
+<section id="cnodejs-snippet-read">
+    <p><b class="orcl-red">R</b>EAD</p>
+    <pre>
+        <code class="js" data-trim data-noescape>
+        const collection = schema.getCollection('pubs')
+
+        const pubs = []
+        await collection
+            .find()
+            .execute(pub => pub && pubs.push(pub))
+
+        console.log(pubs) // [{ _id: 132775981, ... }, { id: 132775992, ... }, ... ]
+        </code>
+    </pre>
+</section>
+<section id="cnodejs-snippet-update">
+    <P><b class="orcl-red">U</b>PDATE</P>
+    <pre>
+        <code class="js" data-trim data-noescape>
+        const collection = schema.getCollection('pubs')
+
+        await collection
+            .modify('$.id == 132775981')
+            .set('type', 'foo')
+            .set('oldType', 'node')
+            .execute()
+
+        const pubs = []
+        await collection
+            .find()
+            .execute(pub => pub && pubs.push(pub))
+
+        console.log(pubs) // [{ type: 'foo', _id: 132775981, oldType: 'node' }, ... ]
+        </code>
+    </pre>
+</section>
+<section id="cnodejs-snippet-delete">
+    <p><b class="orcl-red">D</b>ELETE</p>
+    <pre>
+        <code class="js" data-trim data-noescape>
+        const collection = schema.getCollection('pubs')
+
+        await collection
+            .remove('$.type == "foo"')
+            .execute()
+
+        const pubs = []
+        await collection
+            .find()
+            .execute(pub => pub && pubs.push(pub))
+
+        console.log(pubs)
+        // [{ type: 'node', _id: 132775992, ... }, { type: 'node', _id: 132776246, ... }]
+        </code>
+    </pre>
+</section>
+<section id="cnodejs-snippet-transactions">
+    <p>Transaction Support</p>
+    <pre>
+        <code class="js" data-trim data-noescape>
+        try {
+            await session.startTransaction()
+
+            const result = await schema.getCollection('beers')
+                .add({ name: 'Guinness', pubs: [ 132775992 ] }).execute()
+
+            await schema.getCollection('pubs').modify('$._id == 132775992')
+                .arrayAppend('beers', result.getDocumentId()).execute()
+
+            await session.commit()
+        } catch (err) {
+            await session.rollback()
+        }
+        </code>
+    </pre>
+</section>

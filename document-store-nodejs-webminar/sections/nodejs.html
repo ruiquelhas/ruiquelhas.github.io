@@ -1,0 +1,112 @@
+<!-- Rui: -->
+<!-- ~12 minutes -->
+<h2>Node.js</h2>
+<section id="nodejs-intro">
+    <p>(straight) from the <a href="https://nodejs.org/en/">horse's mouth</a></p>
+    <blockquote cite="https://nodejs.org/en/">
+        Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.
+        Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient.
+        Node.js' package ecosystem, npm, is the largest ecosystem of open source libraries in the world.
+    </blockquote>
+</section>
+<section id="nodejs-overview">
+    <p>Overview</p>
+    <ul>
+        <li>JavaScript server runtime on top of <a href="https://github.com/v8/v8">V8</a></li>
+        <li>HTTP as a first-class citizen</li>
+        <li>Filesystem, OS, network (TCP/UDP) and TLS</li>
+        <li>Out-of-the box streaming APIs</li>
+        <li>Non-blocking IO through the <a href="https://www.youtube.com/watch?v=8aGhZQkoFbQ">event loop</a></li>
+        <li>Bindings for C/C++ native addons</li>
+        <li>Unified module system (<a href="https://nodejs.org/docs/latest/api/modules.html">CommonJS</a>) and package manager (<a href="https://docs.npmjs.com/">npm</a>)</li>
+    </ul>
+</section>
+<section id="nodejs-programming-model">
+    <p>Programming model</p>
+    <ul>
+        <li>Single-threaded environment (it's JavaScript after all)</li>
+        <li>Asynchronous callback-based core</li>
+        <li>Non-blocking operations run immediatelly and sequentially</li>
+        <li>Blocking operations queued outside execution scope</li>
+        <li>Result of a blocking operation is handled "eventually"</li>
+        <li>Concurrency with C++ APIs (threads) or multiple processes</li>
+    </ul>
+</section>
+<section id="nodejs-dealing-with-asynchronicity">
+    <p>Dealing with asynchronicity</p>
+    <ul>
+        <li>
+            Push-based abstractions for asynchronous callbacks:
+            <ul>
+                <li>Event emitters</li>
+                <li>Streams (special kind of event emitters)</li>
+                <li>Promises</li>
+            </ul>
+        </li>
+        <li>
+            Pull-based abstractions for asynchronous callbacks:
+            <ul>
+                <li>Generators</li>
+                <li>Async/await</li>
+            </ul>
+        </li>
+        <li>Many other userland experiments of both kinds</li>
+    </ul>
+</section>
+<section id="nodejs-callbacks">
+    <p>Callback pattern</p>
+    <pre>
+        <code class="js" data-trim data-noescape>
+            const asyncFn = (success, callback) => {
+                setTimeout(() => {
+                    if (!success) return callback(new Error('bar'))
+                    callback(null, 'foo')
+                }, 1000)
+            }
+
+            asyncFn(true, (err, data) => {
+                console.log(data) // foo
+            })
+
+            asyncFn(false, (err) => {
+                console.log(err.message) // bar
+            })
+        </code>
+    </pre>
+</section>
+<section id="nodejs-push-promise">
+    <p>Promises</p>
+    <pre>
+        <code class="js" data-trim data-noescape>
+        const promise1 = Promise.resolve('foo')
+        const promise2 = Promise.reject(new Error('bar'))
+
+        promise1.then(data => {
+            console.log(data) // foo
+        })
+
+        promise2.catch(err => {
+            console.log(err.message) // bar
+        })
+        </code>
+    </pre>
+</section>
+<section id="nodejs-pull-async-await">
+    <p>async/await</p>
+    <pre>
+        <code class="js" data-trim data-noescape>
+        const asyncFn1 = () => Promise.resolve('foo')
+        const asyncFn2 = () => Promise.reject(new Error('bar'))
+
+        (async function () {
+            try {
+                const value = await asyncFn1()
+                console.log(value) // 'foo'
+                await asyncFn2()
+            } catch (err) {
+                console.log(err.message) // 'bar'
+            }
+        }())
+        </code>
+    </pre>
+</section>

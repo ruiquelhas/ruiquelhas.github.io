@@ -1,0 +1,170 @@
+body:after {
+	content: url(../images/orcl-logo.png);
+	position: fixed;
+	bottom: 0px;
+	left: 11em;
+}
+
+body:before {
+	content: 'Copyright © 2017, Oracle and/or its affiliates. All rights reserved.';
+	position: fixed;
+	bottom: 0.5em;
+	right: 3.5em;
+	font-family: 'Calibri', 'Open Sans', sans-serif;
+}
+
+.reveal:after {
+	content: url(../images/mysql-logo.png);
+	position: fixed;
+	top: 0.5em;
+	right: 3.5em;
+}
+
+.reveal {
+  font-family: 'Calibri', 'Open Sans', sans-serif;
+  color: #58595b;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  color: #58595b;
+  font-family: Calibri;
+  text-transform: none;
+}
+
+.reveal code {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.75em;
+}
+
+.reveal pre {
+  box-shadow: none
+}
+
+.reveal blockquote {
+  background-color: #58595b;
+  color: #ffffff;
+  font-size: 0.8em;
+}
+
+.reveal a, .reveal a:hover{
+  color: #ff0000;
+}
+
+.reveal .controls .navigate-left,
+.reveal .controls .navigate-left.enabled {
+  border-right-color: #ff0000; }
+
+.reveal .controls .navigate-right,
+.reveal .controls .navigate-right.enabled {
+  border-left-color: #ff0000; }
+
+.reveal .controls .navigate-up,
+.reveal .controls .navigate-up.enabled {
+  border-bottom-color: #ff0000; }
+
+.reveal .controls .navigate-down,
+.reveal .controls .navigate-down.enabled {
+  border-top-color: #ff0000; }
+
+.reveal .controls .navigate-left.enabled:hover {
+  border-right-color: #ee1111; }
+
+.reveal .controls .navigate-right.enabled:hover {
+  border-left-color: #ee1111; }
+
+.reveal .controls .navigate-up.enabled:hover {
+  border-bottom-color: #ee1111; }
+
+.reveal .controls .navigate-down.enabled:hover {
+  border-top-color: #ee1111; }
+
+.reveal .progress span {
+  background: #ff0000;
+}
+
+.reveal .inline {
+  font-family: 'Source Code Pro', monospace;
+  font-style: italic;
+  font-size: 0.75em;
+}
+
+.reveal img.author,
+.reveal img.ebnf,
+.reveal img#sakilla {
+  border: none;
+  box-shadow: none;
+}
+
+.bio {
+  margin-left: 20% !important;
+  margin-right: 20% !important;
+}
+
+.details, .picture {
+  display: inline-block;
+  text-align: left;
+  vertical-align: top !important;
+}
+
+.details {
+  padding-top: 5% !important;
+  width: 55%;
+}
+
+.details .name {
+  font-size: 0.8em;
+  line-height: 1.5em;
+  margin: 0px !important;
+}
+
+.details .job-title {
+  font-size: 0.5em;
+  line-height: 1.5em;
+  margin: 0px !important;
+}
+
+.details .job-description {
+  font-size: 0.4em;
+  line-height: 1.5em;
+  margin: 0px !important;
+}
+
+.picture {
+  width: 25%;
+}
+
+.reveal .main-title {
+  font-size: 2.2em;
+}
+
+.reveal .main-subtitle {
+  font-size: 0.85em;
+  font-weight: bold;
+  margin-bottom: 2em;
+}
+
+.reveal .authors {
+  font-size: 0.85em;
+}
+
+.reveal li {
+  font-size: 0.85em;
+}
+
+.reveal li li {
+  font-size: 0.71em;
+}
+
+.orcl-red {
+  color: #ee1111;
+}
+
+.mysql-full {
+  color:#ffffff;
+  text-align: left;
+}
